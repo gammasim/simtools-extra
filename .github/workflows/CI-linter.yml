@@ -53,6 +53,7 @@ jobs:
       - name: Python dependencies
         run: |
           pip install pylint
+          pip install pre-commit
 
       - name: Pre-commit
         run: |
