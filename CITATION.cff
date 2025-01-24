@@ -1,0 +1,30 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  simtools-extra - tools and scripts useful for
+  the maintenance of simtools and the CTAO simulation model.
+message: Please cite this software using these metadata.
+type: software
+authors:
+  - given-names: Orel
+    family-names: Gueta
+    orcid: 'https://orcid.org/0000-0002-9440-2398'
+    affiliation: CTAO
+  - given-names: Tobias
+    name-particle: K.
+    family-names: Kleiner
+    orcid: 'https://orcid.org/0000-0002-4260-9186'
+    affiliation: DESY
+  - given-names: Eshita
+    family-names: Joshi
+    orcid: 'https://orcid.org/0000-0001-8557-1141'
+    affiliation: DESY
+  - given-names: Gernot
+    family-names: Maier
+    affiliation: DESY
+    orcid: 'https://orcid.org/0000-0001-9868-4700'
+repository-code: 'https://github.com/gammasim/simtools-extra'
+# doi: 10.5281/zenodo.6346697
+license: BSD-3-Clause
