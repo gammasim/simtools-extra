@@ -54,6 +54,7 @@ jobs:
         run: |
           pip install pylint
           pip install pre-commit
+          pip install gammasimtools
 
       - name: Pre-commit
         run: |
