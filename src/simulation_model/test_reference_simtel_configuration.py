@@ -20,6 +20,8 @@ r"""
     python ../simtools-extra/src/simulation_model/test_reference_simtel_configuration.py prod5-south
     ```
 
+    Note: tool gives incorrect answers for prod(5,6)-north CT3 and CT4.
+
     Allowed options are: 'prod5-north', 'prod5-south', 'prod6-north', 'prod6-south'.
 
     Original sim_telarray configurations are downloaded from their respective Zenodo repositories.
