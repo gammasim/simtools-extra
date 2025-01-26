@@ -1,0 +1,10 @@
+# The LST and MST+SST stereo triggers are basically independent but any
+# extra triggered MST or SST is included in the readout after a LST stereo
+# trigger. Single triggered LSTs are not to be read out after a MST+SST trigger.
+# Without 'hardstereo', such events would have to be cleaned of the LST data in
+# the analysis stage to emulate the hardware stereo readout.
+# The array layout supported here is the 4+25+50 Alpha layout plus optional positions
+# or the strict prod-5 baseline layout (4+25+70) without alternate MST camera type.
+
+Trigger 2 of 1, 2, 3, 4 width 120 hardstereo  # LST array (hardware) stereo trigger
+Trigger 2 of 5 to 29, 30 to 99 width 400      # Alpha/Baseline MST+SST array (software) stereo trigger
