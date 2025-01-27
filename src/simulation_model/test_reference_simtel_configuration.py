@@ -243,6 +243,9 @@ def _compare_configuration_files(simtel_cfg, simtools_cfg):
         "CAMERA_CONFIG_NAME",
         "CAMERA_CONFIG_VARIANT",
         "TAILCUT_SCALE",
+        "PULSE_ANALYSIS",
+        "SUM_BEFORE_PEAK",
+        "SUM_AFTER_PEAK",
     }
 
     n_par_differ = 0
