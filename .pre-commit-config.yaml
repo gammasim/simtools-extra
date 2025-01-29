@@ -22,6 +22,7 @@ repos:
           [
             "-rn",  # Only display messages
             "-sn",  # Don't display the score
+            "--disable=W1203",  # Disable Use lazy % formatting in logging functions
           ]
   # https://github.com/pre-commit/pre-commit-hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
