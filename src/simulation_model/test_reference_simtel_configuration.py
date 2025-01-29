@@ -253,9 +253,9 @@ def _compare_configuration_files(simtel_cfg, simtools_cfg):
         if any(keyword in simtel_line for keyword in ignore_keywords):
             continue
         if simtel_line != simtools_line:
-            print("Lines differ:")
-            print("\t SIMTEL  :", simtel_line)
-            print("\t SIMTOOLS:", simtools_line)
+            logger.error("Lines differ:")
+            logger.error(f"\t SIMTEL  : {simtel_line}")
+            logger.error(f"\t SIMTOOLS:, {simtools_line}")
             n_par_differ += 1
 
     # Test site parameter (one-by-one; as cfg files are different in structure for sites)
@@ -266,12 +266,12 @@ def _compare_configuration_files(simtel_cfg, simtools_cfg):
         simtel_par = [line for line in simtel_cfg if par.upper() in line.upper()]
         simtools_par = [line for line in simtools_cfg if par.upper() in line.upper()]
         if simtel_par != simtools_par:
-            print("Site parameter differ:")
-            print("\t SIMTEL  :", simtel_par)
-            print("\t SIMTOOLS:", simtools_par)
+            logger.error("Site parameter differ:")
+            logger.error(f"\t SIMTEL  : {simtel_par}")
+            logger.error(f"\t SIMTOOLS: {simtools_par}")
             n_par_differ += 1
 
-    print(f"Number of different parameters: {n_par_differ}")
+    logger.info(f"Number of different parameters: {n_par_differ}")
 
 
 def main():
