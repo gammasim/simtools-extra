@@ -13,6 +13,8 @@ r"""
     'cfg' directory in the sim_telarray installation:
 
     1. start a 'simtools-dev' container (as outlined in simtools/docker/README.md)
+    2. download the reference configuration file from Zenodo using the script
+    `download_configuration_from_zenodo.py`
     2. run this script:
 
     ```
@@ -33,11 +35,9 @@ import logging
 import os
 import shutil
 import subprocess
-import tarfile
-import warnings
+
 from pathlib import Path
 
-import requests
 from dotenv import load_dotenv
 
 logger = logging.getLogger()
@@ -274,33 +274,6 @@ def _compare_configuration_files(simtel_cfg, simtools_cfg):
     print(f"Number of different parameters: {n_par_differ}")
 
 
-def download_and_unpack(url, target_directory, filename):
-    """Download and unpack tarball with sim_telarray configuration."""
-
-    tar_path = Path(target_directory) / filename
-    logger.info(f"Downloading sim_telarray configuration from {url}")
-    response = requests.get(url, stream=True, timeout=10)
-    response.raise_for_status()
-
-    with open(tar_path, "wb") as file:
-        for chunk in response.iter_content(chunk_size=8192):
-            file.write(chunk)
-
-    logger.info(f"Extracting {tar_path} to {target_directory}")
-    with warnings.catch_warnings():  # warnings; should go away with python 3.12
-        warnings.simplefilter("ignore", category=RuntimeWarning)
-        with tarfile.open(tar_path, "r:*") as tar:
-            tar.extractall(path=target_directory)
-    tar_path.unlink()
-
-    # Prod5 files missing in Zenodo archive
-    files_to_copy = {"cfg/CTA-PROD5-Paranal-Alpha.cfg", "cfg/array_trigger_prod5_paranal_alpha.dat"}
-    cfg_dir = Path(target_directory) / "sim_telarray/cfg/CTA/"
-    for file in files_to_copy:
-        logger.info(f"Copying {file} to {cfg_dir}")
-        shutil.copy(Path(__file__).parent / file, cfg_dir)
-
-
 def main():
     """Main function."""
     load_dotenv(".env")
@@ -312,18 +285,12 @@ def main():
     args = parser.parse_args()
     production = args.production
 
-    download_configuration = True
-    if download_configuration:
-        urls = [
-            "https://zenodo.org/records/6218687/files/sim_telarray_config_prod5b.tar.gz?download=1",
-            "https://zenodo.org/records/14198379/files/sim_telarray_config_prod6.tar.gz?download=1",
-        ]
-        for url in urls:
-            download_and_unpack(
-                url=url,
-                target_directory=os.getenv("SIMTOOLS_SIMTEL_PATH"),
-                filename="download",
-            )
+    # Prod5 files missing in Zenodo archive
+    files_to_copy = {"cfg/CTA-PROD5-Paranal-Alpha.cfg", "cfg/array_trigger_prod5_paranal_alpha.dat"}
+    cfg_dir = Path(os.getenv("SIMTOOLS_SIMTEL_PATH")) / "sim_telarray/cfg/CTA/"
+    for file in files_to_copy:
+        logger.info(f"Copying {file} to {cfg_dir}")
+        shutil.copy(Path(__file__).parent / file, cfg_dir)
 
     test_reference_simtel_configuration(production)
 
