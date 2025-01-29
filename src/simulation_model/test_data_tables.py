@@ -72,8 +72,8 @@ def test_simtel_files(file_directory: str, simtel_path: str):
         "sst_photon_incidence_angle_secondary_mirror.ecsv",  # simtools-derived
         "sst_photon_incidence_angle_camera_window.ecsv",  # simtools-derived
         "sst_photon_incidence_angle_primary_mirror.ecsv",  # simtools-derived
-        "Benn_LaPalma_sky_converted.lis",
-        "atm_trans_2200_1_3_0_0_0.dat",
+        "Benn_LaPalma_sky_converted.lis",  # needed for testeff and not for nominal simulations
+        "atm_trans_2200_1_3_0_0_0.dat",  # needed for testeff and not for nominal simulations
     ]
     common_list = [
         "atm_trans_2158_1_3_2_0_0_0.1_0.1.dat",
